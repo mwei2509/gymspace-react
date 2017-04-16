@@ -26,11 +26,9 @@ export default class AccountsInput extends Component{
       password: this.state.password
     })
     .then(({data})=>{
-      debugger
       this.props.submitAccount()
     })
     .catch(({data})=>{
-      debugger
       this.setState({
         errors: true,
         error: data

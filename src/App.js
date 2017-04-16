@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './App.css';
 import Accounts from './Components/Accounts'
+import Trainees from './Components/trainees'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div className="App">
+          <Link to="/accounts">Accounts</Link>
+          <Link to="/trainees">Trainees</Link>
+
+          <hr />
+
+          <Route path="/accounts" component={Accounts} />
+          <Route path="/trainees" component={Trainees} />
+
         </div>
-        <Accounts />
-      </div>
+      </Router>
     );
   }
 }
