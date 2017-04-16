@@ -6,7 +6,9 @@ export default class AccountsInput extends Component{
     super()
     this.state={
       email: '',
-      password: ''
+      password: '',
+      errors: false,
+      error:""
     }
   }
 
@@ -25,20 +27,27 @@ export default class AccountsInput extends Component{
     })
     .then(({data})=>{
       debugger
+      this.props.submitAccount()
     })
-    .catch((errors)=>{
-      console.log(errors)
+    .catch(({data})=>{
       debugger
+      this.setState({
+        errors: true,
+        error: data
+      },()=>{console.log(data)})
     })
   }
 
   render(){
     return(
+      <div>
+        {this.state.errors ? <span>{this.state.error}</span> : null}
       <form onSubmit={this.handleSubmit.bind(this)}>
         Email: <input type="text" value={this.state.email} onChange={this.handleChange.bind(this, "email")} /><br />
       Password: <input type="text" value={this.state.password} onChange={this.handleChange.bind(this, "password")}/>
     <button type="submit">Submit</button>
       </form>
+      </div>
     )
   }
 }

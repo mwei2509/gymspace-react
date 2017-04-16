@@ -9,7 +9,8 @@ export default class Accounts extends Component{
       accounts: []
     }
   }
-  componentWillMount(){
+
+  getAccounts(){
     axios
     .get('http://localhost:4000/accounts')
     .then(({data})=>{
@@ -19,6 +20,13 @@ export default class Accounts extends Component{
     })
   }
 
+  componentWillMount(){
+    this.getAccounts()
+  }
+
+  submitAccount(){
+    this.getAccounts()
+  }
 
 
   test(){
@@ -28,7 +36,8 @@ export default class Accounts extends Component{
 
     return(
       <div>
-        <AccountsInput />
+        <AccountsInput
+          submitAccount={this.submitAccount.bind(this)} />
         {this.state.accounts.map((account, index)=>{
           return(
             <li key={index}>
